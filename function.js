@@ -120,27 +120,40 @@
 
 
 
-//Filter functionality
+// //Filter functionality
 
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
-var filter = document.getElementById('filter');
+// var form = document.getElementById('addForm');
+// var itemList = document.getElementById('items');
+// var filter = document.getElementById('filter');
 
-filter.addEventListener('keyup', filterItems);
+// filter.addEventListener('keyup', filterItems);
 
 
-function filterItems(e) {
+// function filterItems(e) {
 
-    var text = e.target.value.toLowerCase();
+//     var text = e.target.value.toLowerCase();
 
-    var items = itemList.getElementsByTagName('li');
+//     var items = itemList.getElementsByTagName('li');
 
-    Array.from(items).forEach(function (item) {
-        var itemName = item.firstChild.textContent;
-        if (itemName.toLowerCase().indexOf(text) != -1) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
+//     Array.from(items).forEach(function (item) {
+//         var itemName = item.firstChild.textContent;
+//         if (itemName.toLowerCase().indexOf(text) != -1) {
+//             item.style.display = 'block';
+//         } else {
+//             item.style.display = 'none';
+//         }
+//     });
+// }
+
+
+//Booking Appointment app
+
+let nameInput = document.getElementById("name");
+let emailInput = document.getElementById("email");
+const submitBtn = document.getElementById("submit");
+
+submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.setItem("name", nameInput.value);
+    localStorage.setItem("email", emailInput.value);
+});
