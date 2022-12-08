@@ -218,3 +218,40 @@ function addNewItem(object) {
     li.appendChild(a);
     ul.appendChild(li);
 }
+
+
+let obj = {
+    num: 2,
+}
+let obj7 = {
+    num: 5,
+}
+let student = {
+    age: 20,
+}
+// let addToThis = function (obj) {
+//     return this.num + obj;
+// }
+let addToThis = function (a, b, c) {
+    return this.num + a + b + c;
+}
+let getAge = function () {
+    return this.age;
+}
+// console.log(addToThis.call(obj, 3));
+let arr = [1, 2, 3];
+// console.log(addToThis.apply(obj, arr));
+// console.log(addToThis.apply(obj7, arr));
+let bound = addToThis.bind(obj);
+let bound2 = getAge.bind(student);
+console.log(bound2());
+console.log(bound(1, 2, 3));
+
+
+let multiply = function (x, y) {
+    console.log(x * y);
+}
+let mulByTwo = multiply.bind(this, 2);
+mulByTwo(5);
+let mulByThree = multiply.bind(this, 3);
+mulByThree(5);
