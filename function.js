@@ -255,3 +255,103 @@ let mulByTwo = multiply.bind(this, 2);
 mulByTwo(5);
 let mulByThree = multiply.bind(this, 3);
 mulByThree(5);
+
+
+
+
+//Promise and callback
+const posts = [
+    {
+        title: 'Post One',
+        body: 'This is post one',
+        timestamp: setInterval(new Date().getSeconds(), 1000)
+    },
+    {
+        title: 'Post Two',
+        body: 'This is post one',
+        timestamp: setInterval(new Date().getSeconds(), 1000)
+    },
+]
+
+function getPosts() {
+    setTimeout(() => {
+        let output = '';
+        posts.forEach((post, index) => {
+            output += `<li>${post.title} created ${post.timestamp}seconds ago</li> `
+        });
+        document.body.innerHTML = output;
+    }, 1000);
+}
+
+function createPosts(post, callback) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            posts.push(post);
+            const error = false;
+            if (!error) {
+                resolve();
+            } else {
+                reject("Error: Something went wrong");
+            }
+        }, 2000);
+    });
+}
+function create4thPost(post, callback) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            posts.push(post);
+            const error = false;
+            if (!error) {
+                resolve();
+            } else {
+                reject("Error: Something went wrong");
+            }
+        }, 2000);
+    });
+}
+
+
+
+createPosts({
+    title: 'Post Three',
+    body: 'This is post three',
+    timestamp: setInterval(new Date().getSeconds(), 1000)
+})
+    .then(getPosts)
+    .catch(err => console.log(err));
+
+create4thPost({
+    title: 'Post four',
+    body: 'This is post four',
+    timestamp: setInterval(new Date().getSeconds(), 1000)
+})
+    .then(createPosts)
+    .catch(err => console.log(err));
+
+console.log(posts);
+
+
+
+getPosts();
+
+var interval = null;
+
+function deletepost() {
+    if (posts.length > 0) {
+        console.log(posts);
+        posts.pop();
+    }
+    else {
+        console.log("Nothing to delete");
+        clearInterval(interval);
+    }
+}
+setTimeout(() => {
+    interval = setInterval(() => {
+        deletepost();
+
+        getPosts();
+    }, 2000);
+}, 4000);
+
+
