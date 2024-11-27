@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="_csrf" th:content="${_csrf.token}" /> -->
+    <title>Post-Graduate Diploma in Archaeology</title>
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <script th:src="@{/jquery/jquery.min.js}"></script>
+
+    <style>
+        body {
+            background: url(images/home.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        th {
+            background-color: orangered !important;
+            /* Set the text color of table headers to red */
+        }
+
+        .bordered {
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        .upload-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <main class="container">
+        <div class="card m-5">
+            <div class="card-body">
+                <h3 class="card-title">Post-Graduate Diploma in Archaeology</h3>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                    Post-Graduate Diploma in Archaeology
+                </h6>
+                <p class="card-text bordered" id="currentDate">2025</p>
+
+
+                <h4>Type of Candidate<span style="color: red">*</span></h4>
+
+                <label for="freshPostGraduate">
+                    <input type="radio" id="freshPostGraduate" name="choice" value="freshPostGraduate" />
+                    Fresh Post Graduate </label><br />
+
+                <label for="candidateUnderEmployment">
+                    <input type="radio" id="candidateUnderEmployment" name="choice" value="candidateUnderEmployment" />
+                    Candidate Under Employment </label><br />
+
+                <!-- Registration Form for Option 1 -->
+                <div id="registrationForm1" style="display: none">
+                    <h5 style="text-align: center">Part-I</h5>
+                    <h5>Personal Details</h5>
+                    <hr />
+                    <form th:action="@{/register}" method="POST" id="userregister">
+
+                        <div class="row">
+
+                            <div class="col-sm-2">
+
+                                Application Number:
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <input type="text" class="form-control" id="applicationNumber" name="registrationid"
+                                    readonly />
+                            </div>
+
+
+
+                            <div class="col-lg-12 mt-3">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="name1">Name of Candidate<span style="color: red">*</span>:</label>
+                                        <input type="text" id="name1" name="nameOfCandidate"
+                                            class="form-control" /><br /><br />
+
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="passport-photo">Upload Passport Size Photograph<span
+                                                style="color: red">*</span>:</label>
+                                        <input type="file" id="passport-photo" name="passport" accept="image/*"
+                                            class="form-control" /><br /><br />
+
+
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="passport-photo">Upload Signature<span
+                                                style="color: red">*</span>:</label>
+                                        <input type="file" id="signature-photo" name="sign" accept="image/*"
+                                            class="form-control" /><br /><br />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+
+                                        <label for="dob">Date of Birth<span style="color: red">*</span>:</label>
+                                        <input type="date" id="dob" name="dob" class="form-control" /><br /><br />
+
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <label for="marksheet-photo">Class 10th Marksheet<span
+                                                style="color: red">*</span>:</label>
+                                        <input type="file" id="marksheet-photo" name="tenmarksheet" accept="image/*"
+                                            class="form-control" /><br /><br />
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+
+                                        <label for="current-address">Present Address <span
+                                                style="color: red">*</span>:</label>
+                                        <textarea id="current-address" name="presentAddress" rows="2" cols="50"
+                                            class="form-control"></textarea><br /><br />
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                         <label for="state">State: <span style="color: red">*</span>:</label>
+                                        <select id="state" name="state" class="form-control">
+                                            <option value="">Select State</option>
+                                        </select><br /><br />
+
+                                    </div>
+                                    <div class="col-md-4">
+                                     
+                                        <label for="district">District: <span style="color: red">*</span>:</label>
+                                        <select id="districtname" name="district" class="form-control">
+                                            <option value="">Select District</option>
+                                        </select><br /><br />
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="city">City: <span style="color: red">*</span>:</label>
+                                        <select id="city" name="city" class="form-control">
+                                            <option value="">Select City</option>
+                                        </select><br /><br />
+
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <label for="pincode">Pincode <span style="color: red">*</span>:</label>
+                                        <input type="text" id="pincode" name="pincode" pattern="^\d{6}$"
+                                            title="Please enter a 6-digit pincode" class="form-control" /><br /><br />
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr />
+
+
+
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="same-address" name="same-address">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Permanent Address same as Current Address
+                                </label>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <!-- Permanent Address -->
+                                        <label for="permanent-address">Permanent Address <span
+                                                style="color: red">*</span>:</label>
+                                        <textarea id="permanent-address" name="permanentAddress" rows="2" cols="50"
+                                            class="form-control"></textarea><br /><br />
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="permanent-state">State: <span style="color: red">*</span>:</label>
+                                        <select id="permanentState" name="permanentState" class="form-control">
+                                            <option value="">Select State</option>
+                                        </select><br /><br />
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="permanent-district">District: <span
+                                                style="color: red">*</span>:</label>
+                                        <select id="permanentDistrict" name="permanentDistrict" class="form-control">
+                                            <option value="">Select District</option>
+                                      
+                                        </select><br /><br />
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="permanent-city">City: <span style="color: red">*</span>:</label>
+                                        <select id="permanentCity" name="permanentCity" class="form-control">
+                                            <option value="">Select District</option>
+                                          
+                                        </select><br /><br />
+
+
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="permanent-pincode">Pincode <span
+                                                style="color: red">*</span>:</label>
+                                        <input type="text" id="permanent-pincode" name="permanentPincode"
+                                            pattern="^\d{6}$" title="Please enter a 6-digit pincode"
+                                            class="form-control" /><br /><br />
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <label for="father-name">Father's Name <span
+                                                style="color: red">*</span>:</label>
+                                        <input type="text" id="father-name" name="fathersName"
+                                            class="form-control" /><br /><br />
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="phone">Phone Number <span style="color: red">*</span>:</label>
+                                        <input type="tel" id="phone" name="phone" placeholder="Enter phone number"
+                                            class="form-control" /><br /><br />
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="phone">Mobile Number <span style="color: red">*</span>:</label>
+                                        <input type="tel" id="mobileNumber" name="mobileNumber"
+                                            placeholder="Enter Mobile number" class="form-control"
+                                            pattern="^\+?\d{1,4}[\s\-]?\(?\d{1,4}\)?[\s\-]?\d{1,4}[\s\-]?\d{1,4}$" /><br /><br />
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="email"> Email ID <span style="color: red">*</span>:</label>
+                                        <input type="email" id="email" name="email" class="form-control"
+                                            placeholder="example@domain.com"
+                                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" /><br /><br />
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>Community<span style="color: red">*</span></label><br />
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="community"
+                                                id="inlineRadio1" value="SC">
+                                            <label class="form-check-label" for="inlineRadio1">SC</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="community"
+                                                id="inlineRadio2" value="ST">
+                                            <label class="form-check-label" for="inlineRadio2">ST</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="community"
+                                                id="inlineRadio3" value="OBC">
+                                            <label class="form-check-label" for="inlineRadio3">OBC</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="community"
+                                                id="inlineRadio3" value="OTHERS">
+                                            <label class="form-check-label" for="inlineRadio3">OTHERS</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="community"
+                                                id="inlineRadio3" value="PH/OH">
+                                            <label class="form-check-label" for="inlineRadio3">PH/OH
+                                                (Physically/Orthopedically Handicapped)</label>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                    <div class="col-md-4">
+
+                                        <label for="cast-certificate">Upload Caste Certificate<span
+                                                style="color: red">*</span>:</label>
+
+                                        <input type="file" id="cast-certificate" name="caste-certificate"
+                                            accept=".pdf, .jpg, .jpeg, .png, .doc, .docx" class="form-control" />
+
+                                        <br /><br />
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="medical-certificate">Medical Fitness Certificate certified from
+                                        government
+                                        hospital<span style="color: red">*</span>:</label>
+
+                                    <input type="file" id="medical-certificate" name="fitness-certificate"
+                                        accept=".pdf, .jpg, .jpeg, .png, .doc, .docx" class="form-control mt-2" />
+
+                                    <p>
+                                        <strong>Note:</strong> Certified From a Government Hospital<span
+                                            style="color: red">*</span>
+                                    </p>
+                                    <br /><br />
+                                </div>
+                            </div>
+
+
+
+                            <!-----------------------------------------------Academic Qualifications-------------------------------------------------------------------------------------------->
+
+                            <h5>Academic Qualifications</h5>
+                            <hr />
+                            <div class="table-responsive">
+                                <table border="1" id="academicQualificationsTable"
+                                    class="table table-bordered table-striped table-hover align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Level</th>
+                                            <th>Examination</th>
+                                            <th>Board/University</th>
+                                            <th>Year of Passing</th>
+                                            <th>Subject</th>
+                                            <th>% of Marks</th>
+                                            <th>Division/Grade</th>
+                                            <th>Documents</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Higher Secondary Row -->
+                                        <tr>
+                                            <td>Matriculation/Higher Secondary</td>
+                                            <td>
+                                                <input type="text" placeholder="Enter examination" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter board" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter year" min="1900" max="2100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter subjects" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter percentage" step="0.01" min="0"
+                                                    max="100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter grade" />
+                                            </td>
+                                            <td>
+                                                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .doc, .docx"
+                                                    id="matriculation" />
+                                            </td>
+                                        </tr>
+
+                                        <!-- Graduation Row -->
+                                        <tr>
+                                            <td>Graduation</td>
+                                            <td>
+                                                <input type="text" placeholder="Enter examination" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter board" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter year" min="1900" max="2100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter subjects" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter percentage" step="0.01" min="0"
+                                                    max="100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter grade" />
+                                            </td>
+                                            <td>
+                                                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .doc, .docx"
+                                                    id="graduation" />
+                                            </td>
+                                        </tr>
+
+                                        <!-- Post Graduation Row -->
+                                        <tr>
+                                            <td>Post-Graduation</td>
+                                            <td>
+                                                <input type="text" placeholder="Enter examination" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter board" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter year" min="1900" max="2100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter subjects" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter percentage" step="0.01" min="0"
+                                                    max="100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter grade" />
+                                            </td>
+                                            <td>
+                                                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .doc, .docx"
+                                                    id="postGraduation" />
+                                            </td>
+                                        </tr>
+
+                                        <!-- M.Phil Row -->
+                                        <tr>
+                                            <td>M.Phil</td>
+                                            <td>
+                                                <input type="text" placeholder="Enter examination" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter board" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter year" min="1900" max="2100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter subjects" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter percentage" step="0.01" min="0"
+                                                    max="100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter grade" />
+                                            </td>
+                                            <td>
+                                                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .doc, .docx"
+                                                    id="mphil" />
+                                            </td>
+                                        </tr>
+
+                                        <!-- NET Row -->
+                                        <tr>
+                                            <td>NET</td>
+                                            <td>
+                                                <input type="text" placeholder="Enter examination" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter board" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter year" min="1900" max="2100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter subjects" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter percentage" step="0.01" min="0"
+                                                    max="100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter grade" />
+                                            </td>
+                                            <td>
+                                                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .doc, .docx"
+                                                    id="net" />
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ph.D. Row -->
+                                        <tr>
+                                            <td>Ph.D.</td>
+                                            <td>
+                                                <input type="text" placeholder="Enter examination" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter board" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter year" min="1900" max="2100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter subjects" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter percentage" step="0.01" min="0"
+                                                    max="100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter grade" />
+                                            </td>
+                                            <td>
+                                                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .doc, .docx"
+                                                    id="phd" />
+                                            </td>
+                                        </tr>
+
+                                        <!-- Other Row -->
+                                        <tr>
+                                            <td>Other</td>
+                                            <td>
+                                                <input type="text" placeholder="Enter examination" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter board" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter year" min="1900" max="2100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter subjects" />
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Enter percentage" step="0.01" min="0"
+                                                    max="100" />
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="Enter grade" />
+                                            </td>
+                                            <td>
+                                                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .doc, .docx"
+                                                    id="others" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p style="color: red">
+                                <strong>Note: </strong>Size of uploaded document is not more
+                                than 5MB
+                            </p>
+                            <br />
+
+                            <label for="researchExperience">
+                                Research Experience (List of Publication to be attached):
+                            </label>
+                            <textarea id="researchExperience" name="researchExperience" rows="4" cols="50"
+                                class="form-control"></textarea><br /><br />
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="field-experience">Reserach/Field Experience if any:</label>
+                                    <input type="file" id="field-experience" name="field-experience" accept="image/*"
+                                        class="form-control" /><br /><br />
+                                </div>
+                            </div>
+
+
+                            <label>
+                                <input type="checkbox" id="confirmData" />
+                                I do hereby declare that the particulars furnished by me above
+                                are correct to the best of my knowledge. I also undertake to
+                                abide by the rules and regulations of the institute. </label><br /><br />
+
+                            <hr />
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 text-center">
+                                    <input type="button" class="btn btn-primary" value="Register" id="registerBtn" />
+                                    <button type="button" class="btn btn-warning">
+                                        Preview & Submit
+                                    </button>
+                                    <button type="button" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <!-- Registration Form for Option 2 -->
+                <div id="registrationForm2" style="display: none">
+                    <h2>Registration Form - Option 2</h2>
+                    <form>
+                        <label for="name2">Name:</label>
+                        <input type="text" id="name2" name="name" /><br /><br />
+
+                        <label for="email2">Email:</label>
+                        <input type="email" id="email2" name="email" /><br /><br />
+
+                        <label for="password2">Password:</label>
+                        <input type="password" id="password2" name="password" /><br /><br />
+
+                        <input type="submit" value="Register - Option 2" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/login.js}"></script>
+</body>
+
+</html>
